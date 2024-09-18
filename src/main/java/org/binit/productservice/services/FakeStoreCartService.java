@@ -1,9 +1,10 @@
 package org.binit.productservice.services;
 
 import org.binit.productservice.dtos.FakeStoreCartDto;
-import org.binit.productservice.dtos.FakeStoreProductDto;
-import org.binit.productservice.models.Cart;
+import org.binit.productservice.dtos.FakeStoreCartProductDto;
+import org.binit.productservice.models.cart.Cart;
 import org.binit.productservice.models.Product;
+import org.binit.productservice.models.cart.CartProduct;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,26 +24,20 @@ public class FakeStoreCartService implements CartService {
         FakeStoreCartDto fakeStoreCartDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/carts/" + cartId, FakeStoreCartDto.class
         );
-
         Cart cart = new Cart();
         cart.setCartId(fakeStoreCartDto.getId());
         cart.setUserId(fakeStoreCartDto.getUserId());
         cart.setDate(fakeStoreCartDto.getDate());
 
-        // Map products from DTO to domain model
-        List<Product> products = new ArrayList<>();
-        for (FakeStoreProductDto productDto : fakeStoreCartDto.getProducts()) {
-            Product product = new Product();
-            product.setId(productDto.getId());
-            product.setTitle(productDto.getTitle());
-            product.setDescription(productDto.getDescription());
-            product.setPrice(productDto.getPrice());
-            product.setImageUrl(productDto.getImg());
-//            product.setCategory(productDto.getCategory());
-            products.add(product);
+        // Map products from DTO to Cart model
+        List<CartProduct> products = new ArrayList<>();
+        for (FakeStoreCartProductDto productDto : fakeStoreCartDto.getProducts()) {
+            CartProduct cartProduct = new CartProduct();
+            cartProduct.setProductId(productDto.getProductId());
+            cartProduct.setQuantity(productDto.getQuantity());
+            products.add(cartProduct);
         }
 
-        // Set the products to the Cart
         cart.setProducts(products);
 
         // Return the populated Cart object

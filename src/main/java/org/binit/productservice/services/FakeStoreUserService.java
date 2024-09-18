@@ -24,30 +24,31 @@ public class FakeStoreUserService implements UserService{
         User user = new User();
         user.setId(fakeStoreUserDto.getId());
         user.setEmail(fakeStoreUserDto.getEmail());
-        user.setUserName(fakeStoreUserDto.getUserName());
+        user.setUserName(fakeStoreUserDto.getUserName());  // Use 'username' (not 'userName') to match DTO
         user.setPassword(fakeStoreUserDto.getPassword());
 
-        // Convert Name DTO to Name domain model
+// Map Name
         Name name = new Name();
-        name.setFirstName(fakeStoreUserDto.getName().getFirstName());
-        name.setLastName(fakeStoreUserDto.getName().getLastName());
+        name.setFirstName(fakeStoreUserDto.getName().getFirstName());  // Match 'firstname' field in DTO
+        name.setLastName(fakeStoreUserDto.getName().getLastName());    // Match 'lastname' field in DTO
         user.setName(name);
 
-        // Convert Address DTO to Address domain model
+// Map Address
         Address address = new Address();
         address.setCity(fakeStoreUserDto.getAddress().getCity());
         address.setStreet(fakeStoreUserDto.getAddress().getStreet());
         address.setNumber(fakeStoreUserDto.getAddress().getNumber());
         address.setZipcode(fakeStoreUserDto.getAddress().getZipcode());
 
-        // Convert Geolocation DTO to Geolocation domain model
+// Map Geolocation
         Geolocation geolocation = new Geolocation();
         geolocation.setLat(fakeStoreUserDto.getAddress().getGeolocation().getLat());
-        geolocation.setLon(fakeStoreUserDto.getAddress().getGeolocation().getLon());
+        geolocation.setLon(fakeStoreUserDto.getAddress().getGeolocation().getLon());  // 'lon' should be mapped
         address.setGeolocation(geolocation);
 
         user.setAddress(address);
         user.setPhone(fakeStoreUserDto.getPhone());
+
         return user;
     }
 }

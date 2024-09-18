@@ -1,8 +1,8 @@
 package org.binit.productservice.services;
 
 import org.binit.productservice.dtos.FakeStoreProductDto;
-import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
+import org.binit.productservice.models.Rating;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,11 +26,13 @@ public class FakeStoreProductService implements ProductService {
         product.setTitle(fakeStoreProductDto.getTitle());
         product.setPrice(fakeStoreProductDto.getPrice());
         product.setDescription(fakeStoreProductDto.getDescription());
-        product.setImageUrl(fakeStoreProductDto.getImg());
+        product.setImageUrl(fakeStoreProductDto.getImage());
+        product.setCategory(fakeStoreProductDto.getCategory());
 
-        Category category = new Category();
-        category.setTitle(fakeStoreProductDto.getCategory());
-        product.setCategory(category);
+        Rating rating = new Rating();
+        rating.setRate(fakeStoreProductDto.getRating().getRate());
+        rating.setCount(fakeStoreProductDto.getRating().getCount());
+        product.setRating(rating);
         return product;
     }
 }

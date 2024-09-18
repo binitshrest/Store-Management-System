@@ -1,4 +1,4 @@
-package org.binit.productservice.models;
+package org.binit.productservice.models.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +16,5 @@ public class Cart {
     private Long cartId;
     private Long userId;
     private String Date;
-    private List<Product> products;
+    private List<CartProduct> products;
 }

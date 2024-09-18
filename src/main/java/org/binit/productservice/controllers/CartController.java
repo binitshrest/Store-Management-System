@@ -1,6 +1,6 @@
 package org.binit.productservice.controllers;
 
-import org.binit.productservice.models.Cart;
+import org.binit.productservice.models.cart.Cart;
 import org.binit.productservice.services.CartService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package org.binit.productservice.models;
+package org.binit.productservice.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
-    private Long id;
-    private String title;
+public class FakeStoreCartProductDto {
+    private Integer productId;
+    private Integer quantity;
 }
