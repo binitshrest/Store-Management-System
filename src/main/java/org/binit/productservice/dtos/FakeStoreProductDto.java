@@ -18,7 +18,7 @@ public class FakeStoreProductDto {
     private String Category;
     private String description;
     private String image;
-    private FakeStoreRatingDto rating;
+//    private FakeStoreRatingDto rating;
 
     public Product toProduct(){
         Product product = new Product();
@@ -29,10 +29,10 @@ public class FakeStoreProductDto {
         product.setImageUrl(getImage());
         product.setCategory(getCategory());
 
-        Rating rating = new Rating();
-        rating.setRate(getRating().getRate());
-        rating.setCount(getRating().getCount());
-        product.setRating(rating);
+//        Rating rating = new Rating();
+//        rating.setRate(getRating().getRate());
+//        rating.setCount(getRating().getCount());
+//        product.setRating(rating);
         return product;
     }
 }

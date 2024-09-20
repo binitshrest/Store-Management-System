@@ -1,6 +1,7 @@
 package org.binit.productservice.services;
 
 import org.binit.productservice.dtos.FakeStoreProductDto;
+import org.binit.productservice.dtos.FakeStoreRatingDto;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.models.Rating;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,10 @@ public class FakeStoreProductService implements ProductService {
         product.setImageUrl(fakeStoreProductDto.getImage());
         product.setCategory(fakeStoreProductDto.getCategory());
 
-        Rating rating = new Rating();
-        rating.setRate(fakeStoreProductDto.getRating().getRate());
-        rating.setCount(fakeStoreProductDto.getRating().getCount());
-        product.setRating(rating);
+//        Rating rating = new Rating();
+//        rating.setRate(fakeStoreProductDto.getRating().getRate());
+//        rating.setCount(fakeStoreProductDto.getRating().getCount());
+//        product.setRating(rating);
         return product;
     }
 
@@ -53,4 +54,34 @@ public class FakeStoreProductService implements ProductService {
 
         return products;
     }
+
+    @Override
+    public Product createProduct( String title, String description,
+                                  double price, String imageUrl,
+                                  String category
+//                                  FakeStoreRatingDto rating
+    ){
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(title);
+        fakeStoreProductDto.setDescription(description);
+        fakeStoreProductDto.setPrice(price);
+        fakeStoreProductDto.setImage(imageUrl);
+        fakeStoreProductDto.setCategory(category);
+
+//        FakeStoreRatingDto fakeStoreRatingDto = new FakeStoreRatingDto();
+//        fakeStoreRatingDto.setRate(rating.getRate());   // Correctly extract rate
+//        fakeStoreRatingDto.setCount(rating.getCount()); // Correctly extract count
+//
+//        // Set the rating in the product DTO
+//        fakeStoreProductDto.setRating(fakeStoreRatingDto);
+
+
+        FakeStoreProductDto response = restTemplate.postForObject(
+                "https://fakestoreapi.com/products",
+                fakeStoreProductDto,
+                FakeStoreProductDto.class
+        );
+        return response.toProduct();
+    }
+
 }

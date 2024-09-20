@@ -1,5 +1,6 @@
 package org.binit.productservice.controllers;
 
+import org.binit.productservice.dtos.CreateProductRequestDto;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.services.ProductService;
 import org.springframework.http.HttpStatusCode;
@@ -17,10 +18,18 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/")
-    public void createProduct(){
-
+    @PostMapping("/products")
+    public Product createProduct(@RequestBody CreateProductRequestDto productRequestDto){
+        return productService.createProduct(
+                productRequestDto.getTitle(),
+                productRequestDto.getDescription(),
+                productRequestDto.getPrice(),
+                productRequestDto.getImageUrl(),
+                productRequestDto.getCategory()
+//                productRequestDto.getRating()
+        );
     }
+
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts(){
