@@ -2,7 +2,11 @@ package org.binit.productservice.controllers;
 
 import org.binit.productservice.models.Product;
 import org.binit.productservice.services.ProductService;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -18,9 +22,13 @@ public class ProductController {
 
     }
 
-    @GetMapping("/")
-    public void getAllProducts(){
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> getAllProducts(){
+        List<Product> responseData = productService.getAllProducts();
 
+        ResponseEntity<List<Product>> responseEntity =
+                new ResponseEntity<>(responseData, HttpStatusCode.valueOf(202));
+        return responseEntity;
     }
 
     @GetMapping("/products/{id}")

@@ -6,6 +6,9 @@ import org.binit.productservice.models.Rating;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FakeStoreProductService implements ProductService {
 
@@ -34,5 +37,20 @@ public class FakeStoreProductService implements ProductService {
         rating.setCount(fakeStoreProductDto.getRating().getCount());
         product.setRating(rating);
         return product;
+    }
+
+    @Override
+    public List<Product> getAllProducts(){
+        FakeStoreProductDto[] response = restTemplate.getForObject(
+                "https://fakestoreapi.com/products",
+                FakeStoreProductDto[].class
+        ); //This will get array of products as a response from fakeStoreapi
+        List<Product> products = new ArrayList<>();
+
+        for(FakeStoreProductDto fakeStoreProductDto: response){
+            products.add(fakeStoreProductDto.toProduct());
+        } // response is the array it will do for each response use fakeSoreProductDto class and add in product.
+
+        return products;
     }
 }
