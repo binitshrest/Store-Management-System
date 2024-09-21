@@ -45,6 +45,21 @@ public class ProductController {
         return productService.getSingleProductById(id);
     }
 
+    @PutMapping("/{id}")
+    public Product updateProduct(
+            @PathVariable Long id,
+            @RequestBody CreateProductRequestDto productRequestDto
+    ) {
+        // Call the service layer to update the product
+        return productService.updateAProduct(
+                id,
+                productRequestDto.getTitle(),
+                productRequestDto.getImageUrl(),
+                productRequestDto.getDescription(),
+                productRequestDto.getCategory(),
+                productRequestDto.getPrice()
+        );
+    }
 //    @DeleteMapping("")
 //    public void deleteProduct(){
 //

@@ -14,10 +14,10 @@ import org.binit.productservice.models.Rating;
 public class FakeStoreProductDto {
     private Long id;
     private String title;
-    private double price;
-    private String Category;
-    private String description;
     private String image;
+    private String description;
+    private String category;
+    private double price;
 //    private FakeStoreRatingDto rating;
 
     public Product toProduct(){
@@ -29,10 +29,7 @@ public class FakeStoreProductDto {
         product.setImageUrl(getImage());
         product.setCategory(getCategory());
 
-//        Rating rating = new Rating();
-//        rating.setRate(getRating().getRate());
-//        rating.setCount(getRating().getCount());
-//        product.setRating(rating);
+
         return product;
     }
 }

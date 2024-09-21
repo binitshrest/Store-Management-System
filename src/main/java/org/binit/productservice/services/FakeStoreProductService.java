@@ -4,6 +4,9 @@ import org.binit.productservice.dtos.FakeStoreProductDto;
 import org.binit.productservice.dtos.FakeStoreRatingDto;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.models.Rating;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -84,4 +87,29 @@ public class FakeStoreProductService implements ProductService {
         return response.toProduct();
     }
 
+    @Override
+    public Product updateAProduct(Long id, String title, String image,
+                                  String description, String category, double price){
+        String url = "https://fakestoreapi.com/products/" + id;
+
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(title);
+        fakeStoreProductDto.setImage(image);
+        fakeStoreProductDto.setDescription(description);
+        fakeStoreProductDto.setCategory(category);
+        fakeStoreProductDto.setPrice(price);
+
+        HttpEntity<FakeStoreProductDto> requestEntity =
+                new HttpEntity<>(fakeStoreProductDto);
+        // Use exchange to perform a PUT and expect a response body
+
+        ResponseEntity<FakeStoreProductDto> response =
+                restTemplate.exchange(
+                        url,
+                        HttpMethod.PUT,
+                        requestEntity,
+                        FakeStoreProductDto.class
+                );
+        return response.getBody().toProduct();
+    }
 }

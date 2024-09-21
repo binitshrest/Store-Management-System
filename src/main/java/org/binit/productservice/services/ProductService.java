@@ -14,4 +14,5 @@ public interface ProductService {
                                   String category
 //                                  FakeStoreRatingDto rating
     );
+    public Product updateAProduct(Long id, String title, String image, String decription, String category, double price);
 }
