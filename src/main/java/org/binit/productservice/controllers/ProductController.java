@@ -60,6 +60,11 @@ public class ProductController {
                 productRequestDto.getPrice()
         );
     }
+
+    @GetMapping("/category/{category}")
+    public List<Product> getProductsByCategory(@PathVariable("category") String category){
+        return productService.getProductsByCategory(category);
+    }
 //    @DeleteMapping("")
 //    public void deleteProduct(){
 //
