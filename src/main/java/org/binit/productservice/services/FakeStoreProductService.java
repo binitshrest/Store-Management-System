@@ -114,10 +114,11 @@ public class FakeStoreProductService implements ProductService {
     }
 
     public List<Product> getProductsByCategory(String category){
-        String url = "https://fakestoreapi.com/products/category/" + category;
+//        String url = "https://fakestoreapi.com/products/category/" + category;
 
         FakeStoreProductDto[] response = restTemplate.getForObject(
-                url, FakeStoreProductDto[].class
+                "https://fakestoreapi.com/products/category/" + category
+                , FakeStoreProductDto[].class
         );
 
         List<Product> products = new ArrayList<>();

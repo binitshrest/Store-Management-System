@@ -46,12 +46,12 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(
+    public ResponseEntity<Product>  updateProduct(
             @PathVariable Long id,
             @RequestBody CreateProductRequestDto productRequestDto
     ) {
         // Call the service layer to update the product
-        return productService.updateAProduct(
+        Product updatedProduct = productService.updateAProduct(
                 id,
                 productRequestDto.getTitle(),
                 productRequestDto.getImageUrl(),
@@ -59,10 +59,13 @@ public class ProductController {
                 productRequestDto.getCategory(),
                 productRequestDto.getPrice()
         );
+
+        // Return the updated product with HTTP status OK (200)
+        return ResponseEntity.ok(updatedProduct);
     }
 
     @GetMapping("/category/{category}")
-    public List<Product> getProductsByCategory(@PathVariable("category") String category){
+    public List<Product> getProductsByCategory(@PathVariable("category") String category) {
         return productService.getProductsByCategory(category);
     }
 //    @DeleteMapping("")
