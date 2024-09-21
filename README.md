@@ -20,7 +20,6 @@
 ## 🛠️ Tech Stack
 
 - **Backend**: Spring Boot (Java 17)
-- **Frontend**: Thymeleaf (HTML, CSS, JavaScript)
 - **API Integration**: 3rd-party API for product details & inventory management
 - **Build Tool**: Maven 3.8.4
 - **Security**: Spring Security
