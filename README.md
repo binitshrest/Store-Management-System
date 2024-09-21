@@ -8,12 +8,12 @@
 
 ## 🚀 Features
 
-- **Inventory Management**: Seamlessly fetch product details and inventory data from a third-party API.
+- **Inventory Management**: Fetch product details and inventory data from a third-party API.
 - **Customer Management**: Store customer information, purchase history, and contact details.
-- **Sales Tracking**: Manage sales records, invoices, and payments effortlessly.
+- **Sales Tracking**: Manage sales records, invoices, and payments.
 - **Reporting**: Generate detailed sales and inventory reports.
 - **Authentication & Authorization**: Secure system with role-based access controls.
-- **REST API**: Expose system functionality via a robust REST API for external integration.
+- **REST API**: Expose system functionality via a robust REST API.
 
 ---
 
@@ -42,37 +42,39 @@
    git clone https://github.com/your-username/store-management-system.git
    cd store-management-system
 
-   ---
-
-## 🏗️ Build and Run
-
-To build and run the application, follow these commands:
-
-```bash
-# Clean and install dependencies
-mvn clean install
-
-# Run the Spring Boot application
-mvn spring-boot:run
-
-
-
----
 
 ## 📡 API Endpoints
 
 ### 🛒 Product & Inventory Management
 
-- **GET** `/products`  
-  Fetch all products from the third-party API.
+1. **GET** `/products`  
+   *Fetch all products from the third-party API.*
 
+2. **GET** `/products/{id}`  
+   *Fetch a specific product by its ID.*
 
----
+3. **POST** `/products`  
+   *Create a new product.*
 
-### 👥 Product Management
+4. **PUT** `/products/{id}`  
+   *Update an existing product.*
 
-- **GET** `/products`  
-  Retrieve all customers.
+5. **DELETE** `/products/{id}`  
+   *Delete a product.*
 
-- **POST** `/products/{id}`  
-  Add a new customer.
+6. **GET** `/products/category/{category}`  
+   *Retrieve products filtered by category.*
+
+### 🛒 Cart Management
+
+1. **GET** `/cart/{id}`  
+   *Fetch details of a single cart by its ID.*  
+   **Parameters**:
+   - `id` (path) - The unique identifier of the cart.  
+
+### 🛒 User Management
+
+1. **GET** `/users/{id}`  
+   *Fetch details of a single user by its ID.*  
+   **Parameters**:
+   - `id` (path) - The unique identifier of the user.  
