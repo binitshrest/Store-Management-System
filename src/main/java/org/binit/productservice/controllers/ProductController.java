@@ -45,7 +45,7 @@ public class ProductController {
         return productService.getSingleProductById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<Product>  updateProduct(
             @PathVariable Long id,
             @RequestBody CreateProductRequestDto productRequestDto
@@ -64,12 +64,14 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
-    @GetMapping("/category/{category}")
+    @GetMapping("/products/category/{category}")
     public List<Product> getProductsByCategory(@PathVariable("category") String category) {
         return productService.getProductsByCategory(category);
     }
-//    @DeleteMapping("")
-//    public void deleteProduct(){
 //
-//    }
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
+        productService.deleteProductById(id);
+        return ResponseEntity.noContent().build();  // Return 204 No Content if successful
+    }
 }

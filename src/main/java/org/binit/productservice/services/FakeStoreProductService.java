@@ -129,4 +129,10 @@ public class FakeStoreProductService implements ProductService {
         }
         return products;
     }
+    @Override
+    public void deleteProductById(Long id) {
+        String url = "https://fakestoreapi.com/products/" + id;
+        restTemplate.delete(url);
+    }
+
 }

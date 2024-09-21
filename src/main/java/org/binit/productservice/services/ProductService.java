@@ -16,4 +16,5 @@ public interface ProductService {
     );
     public Product updateAProduct(Long id, String title, String image, String decription, String category, double price);
     public List<Product> getProductsByCategory(String category);
+    void deleteProductById(Long id);
 }
