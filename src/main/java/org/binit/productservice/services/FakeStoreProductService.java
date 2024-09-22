@@ -36,10 +36,10 @@ public class FakeStoreProductService implements ProductService {
         product.setImageUrl(fakeStoreProductDto.getImage());
         product.setCategory(fakeStoreProductDto.getCategory());
 
-//        Rating rating = new Rating();
-//        rating.setRate(fakeStoreProductDto.getRating().getRate());
-//        rating.setCount(fakeStoreProductDto.getRating().getCount());
-//        product.setRating(rating);
+        Rating rating = new Rating();
+        rating.setRate(fakeStoreProductDto.getRating().getRate());
+        rating.setCount(fakeStoreProductDto.getRating().getCount());
+        product.setRating(rating);
         return product;
     }
 
@@ -61,8 +61,8 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public Product createProduct( String title, String description,
                                   double price, String imageUrl,
-                                  String category
-//                                  FakeStoreRatingDto rating
+                                  String category,
+                                  FakeStoreRatingDto rating
     ){
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
         fakeStoreProductDto.setTitle(title);
@@ -71,12 +71,12 @@ public class FakeStoreProductService implements ProductService {
         fakeStoreProductDto.setImage(imageUrl);
         fakeStoreProductDto.setCategory(category);
 
-//        FakeStoreRatingDto fakeStoreRatingDto = new FakeStoreRatingDto();
-//        fakeStoreRatingDto.setRate(rating.getRate());   // Correctly extract rate
-//        fakeStoreRatingDto.setCount(rating.getCount()); // Correctly extract count
-//
-//        // Set the rating in the product DTO
-//        fakeStoreProductDto.setRating(fakeStoreRatingDto);
+        FakeStoreRatingDto fakeStoreRatingDto = new FakeStoreRatingDto();
+        fakeStoreRatingDto.setRate(rating.getRate());   // Correctly extract rate
+        fakeStoreRatingDto.setCount(rating.getCount()); // Correctly extract count
+
+        // Set the rating in the product DTO
+        fakeStoreProductDto.setRating(fakeStoreRatingDto);
 
 
         FakeStoreProductDto response = restTemplate.postForObject(

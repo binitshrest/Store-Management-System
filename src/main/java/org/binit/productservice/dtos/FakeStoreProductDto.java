@@ -18,7 +18,7 @@ public class FakeStoreProductDto {
     private String description;
     private String category;
     private double price;
-//    private FakeStoreRatingDto rating;
+    private FakeStoreRatingDto rating;
 
     public Product toProduct(){
         Product product = new Product();

@@ -1,6 +1,7 @@
 package org.binit.productservice.controllers;
 
 import org.binit.productservice.dtos.CreateProductRequestDto;
+import org.binit.productservice.dtos.ErrorDto;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.services.ProductService;
 import org.springframework.http.HttpStatusCode;
@@ -25,8 +26,8 @@ public class ProductController {
                 productRequestDto.getDescription(),
                 productRequestDto.getPrice(),
                 productRequestDto.getImageUrl(),
-                productRequestDto.getCategory()
-//                productRequestDto.getRating()
+                productRequestDto.getCategory(),
+                productRequestDto.getRating()
         );
     }
 
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<Product>  updateProduct(
+    public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
             @RequestBody CreateProductRequestDto productRequestDto
     ) {
@@ -68,10 +69,21 @@ public class ProductController {
     public List<Product> getProductsByCategory(@PathVariable("category") String category) {
         return productService.getProductsByCategory(category);
     }
-//
+
+    //Get product by price
+
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();  // Return 204 No Content if successful
+    }
+
+    //Exception Handling for product controller
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<ErrorDto> handleNullPointerException(){
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setMessage("Something went wrong. Please try again");
+
+        return new ResponseEntity<>(errorDto, HttpStatusCode.valueOf(404));
     }
 }

@@ -8,6 +8,9 @@ import org.binit.productservice.models.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FakeStoreUserService implements UserService{
 
@@ -50,5 +53,10 @@ public class FakeStoreUserService implements UserService{
         user.setPhone(fakeStoreUserDto.getPhone());
 
         return user;
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        return null;
     }
 }

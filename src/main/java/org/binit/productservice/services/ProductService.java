@@ -11,8 +11,8 @@ public interface ProductService {
     public List<Product> getAllProducts();
     public Product createProduct( String title, String description,
                                   double price, String imageUrl,
-                                  String category
-//                                  FakeStoreRatingDto rating
+                                  String category,
+                                  FakeStoreRatingDto rating
     );
     public Product updateAProduct(Long id, String title, String image, String decription, String category, double price);
     public List<Product> getProductsByCategory(String category);

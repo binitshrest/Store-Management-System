@@ -4,6 +4,8 @@ import org.binit.productservice.models.userdetails.User;
 import org.binit.productservice.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -13,8 +15,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
-    public void getAllUsers(){
+    @GetMapping("/")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
 
     }
     @GetMapping("/{id}")
