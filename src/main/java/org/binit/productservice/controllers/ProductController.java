@@ -78,12 +78,5 @@ public class ProductController {
         return ResponseEntity.noContent().build();  // Return 204 No Content if successful
     }
 
-    //Exception Handling for product controller
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ErrorDto> handleNullPointerException(){
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setMessage("Something went wrong. Please try again");
 
-        return new ResponseEntity<>(errorDto, HttpStatusCode.valueOf(404));
-    }
 }
