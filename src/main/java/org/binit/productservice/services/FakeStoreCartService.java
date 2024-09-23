@@ -1,9 +1,8 @@
 package org.binit.productservice.services;
 
-import org.binit.productservice.dtos.FakeStoreCartDto;
-import org.binit.productservice.dtos.FakeStoreCartProductDto;
+import org.binit.productservice.dtos.cartDto.FakeStoreCartDto;
+import org.binit.productservice.dtos.cartDto.FakeStoreCartProductDto;
 import org.binit.productservice.models.cart.Cart;
-import org.binit.productservice.models.Product;
 import org.binit.productservice.models.cart.CartProduct;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

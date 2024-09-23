@@ -1,5 +1,8 @@
 package org.binit.productservice.services;
 
+import org.binit.productservice.dtos.userdetailsDto.FakeStoreAddressDto;
+import org.binit.productservice.dtos.userdetailsDto.FakeStoreGeolocationDto;
+import org.binit.productservice.dtos.userdetailsDto.FakeStoreNameDto;
 import org.binit.productservice.dtos.userdetailsDto.FakeStoreUserDto;
 import org.binit.productservice.models.userdetails.Address;
 import org.binit.productservice.models.userdetails.Geolocation;
@@ -57,6 +60,53 @@ public class FakeStoreUserService implements UserService{
 
     @Override
     public List<User> getAllUsers(){
-        return null;
+        String url = "https://fakestoreapi.com/users/";
+        FakeStoreUserDto[] response = restTemplate.getForObject(
+                url,
+                FakeStoreUserDto[].class
+        );
+        List<User> users = new ArrayList<>();
+        for(FakeStoreUserDto fakeStoreUserDto: response){
+            users.add(fakeStoreUserDto.toUser());
+        }
+
+        return users;
+    }
+
+    @Override
+    public User addTheUser(String email, String userName, String password,
+                           FakeStoreNameDto name, FakeStoreAddressDto address
+            , String phone){
+        String url = "https://fakestoreapi.com/users";
+
+        FakeStoreUserDto fakeStoreUserDto = new FakeStoreUserDto();
+        fakeStoreUserDto.setEmail(email);
+        fakeStoreUserDto.setUserName(userName);
+        fakeStoreUserDto.setPassword(password);
+
+        FakeStoreNameDto fakeStoreNameDto = new FakeStoreNameDto();
+        fakeStoreNameDto.setFirstName(name.getFirstName());
+        fakeStoreNameDto.setLastName(name.getLastName());
+        fakeStoreUserDto.setName(fakeStoreNameDto);
+
+        FakeStoreAddressDto fakeStoreAddressDto = new FakeStoreAddressDto();
+        fakeStoreAddressDto.setCity(address.getCity());
+        fakeStoreAddressDto.setStreet(address.getStreet());
+        fakeStoreAddressDto.setNumber(address.getNumber());
+        fakeStoreAddressDto.setZipcode(address.getZipcode());
+        fakeStoreUserDto.setAddress(fakeStoreAddressDto);
+
+        FakeStoreGeolocationDto fakeStoreGeolocationDto = new FakeStoreGeolocationDto();
+        fakeStoreGeolocationDto.setLat(address.getGeolocation().getLat());
+        fakeStoreGeolocationDto.setLon(address.getGeolocation().getLon());
+        fakeStoreAddressDto.setGeolocation(fakeStoreGeolocationDto);
+
+        FakeStoreUserDto response = restTemplate.postForObject(
+            url,
+                fakeStoreUserDto,
+                FakeStoreUserDto.class
+        );
+
+        return response.toUser();
     }
 }

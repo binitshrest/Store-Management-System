@@ -1,4 +1,4 @@
-package org.binit.productservice.dtos;
+package org.binit.productservice.dtos.cartDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

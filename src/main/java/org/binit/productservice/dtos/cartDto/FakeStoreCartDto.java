@@ -1,10 +1,9 @@
-package org.binit.productservice.dtos;
+package org.binit.productservice.dtos.cartDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.binit.productservice.models.Product;
 
 import java.util.List;
 
