@@ -12,4 +12,7 @@ public interface UserService {
     public User addTheUser( String email,String userName,String password,
                             FakeStoreNameDto name, FakeStoreAddressDto address
                             ,String phone);
+    public User updateTheUser(Long id, String email, String userName,
+                              String password, FakeStoreNameDto name,
+                              FakeStoreAddressDto address, String phone);
 }

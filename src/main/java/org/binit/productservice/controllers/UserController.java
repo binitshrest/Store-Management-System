@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> addTheUser(CreateUserRequestDto createUserRequestDto) {
-        User user = userService.addTheUser(
+    public User addTheUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
+        return userService.addTheUser(
                 createUserRequestDto.getEmail(),
                 createUserRequestDto.getUserName(),
                 createUserRequestDto.getPassword(),
@@ -43,13 +43,22 @@ public class UserController {
                 createUserRequestDto.getAddress(),
                 createUserRequestDto.getPhone()
         );
-        return ResponseEntity.ok(user);  // Return the created user as a response
     }
 
 
-    @PutMapping("")
-    public void updateTheUser(){
-
+    @PutMapping("/{id}")
+    public User updateTheUser(@PathVariable("id") Long id,
+                              @RequestBody CreateUserRequestDto createUserRequestDto){
+        User updatedUser = userService.updateTheUser(
+                id,
+                createUserRequestDto.getEmail(),
+                createUserRequestDto.getUserName(),
+                createUserRequestDto.getPassword(),
+                createUserRequestDto.getName(),
+                createUserRequestDto.getAddress(),
+                createUserRequestDto.getPhone()
+        );
+        return updatedUser;
     }
 
     @DeleteMapping("")
