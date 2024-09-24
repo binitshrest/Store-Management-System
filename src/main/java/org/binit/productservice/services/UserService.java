@@ -15,4 +15,5 @@ public interface UserService {
     public User updateTheUser(Long id, String email, String userName,
                               String password, FakeStoreNameDto name,
                               FakeStoreAddressDto address, String phone);
+    public void deleteUser(Long id);
 }

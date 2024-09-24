@@ -155,4 +155,9 @@ public class FakeStoreUserService implements UserService{
         return response.getBody().toUser();
     }
 
+    @Override
+    public void deleteUser(Long id){
+        String url = "https://fakestoreapi.com/users/" + id;
+        restTemplate.delete(url);
+    }
 }
