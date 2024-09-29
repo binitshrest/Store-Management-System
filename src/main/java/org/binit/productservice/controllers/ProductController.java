@@ -4,6 +4,7 @@ import org.binit.productservice.dtos.CreateProductRequestDto;
 import org.binit.productservice.dtos.ErrorDto;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ProductController {
 
     ProductService productService;
-    public ProductController(ProductService productService){
+    public ProductController(@Qualifier("productserviceimple") ProductService productService){
         this.productService = productService;
     }
 

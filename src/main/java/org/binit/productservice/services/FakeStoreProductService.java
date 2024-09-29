@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakestoreproduct")
 public class FakeStoreProductService implements ProductService {
 
     RestTemplate restTemplate;
@@ -29,7 +29,7 @@ public class FakeStoreProductService implements ProductService {
         );
 
         Product product = new Product();
-        product.setId(fakeStoreProductDto.getId());
+//        product.setId(fakeStoreProductDto.getId());
         product.setTitle(fakeStoreProductDto.getTitle());
         product.setPrice(fakeStoreProductDto.getPrice());
         product.setDescription(fakeStoreProductDto.getDescription());

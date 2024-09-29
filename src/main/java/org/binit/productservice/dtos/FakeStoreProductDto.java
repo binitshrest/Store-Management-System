@@ -22,7 +22,7 @@ public class FakeStoreProductDto {
 
     public Product toProduct(){
         Product product = new Product();
-        product.setId(getId());
+//        product.setId(getId());
         product.setTitle(getTitle());
         product.setPrice(getPrice());
         product.setDescription(getDescription());
