@@ -6,18 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
-public class BaseModel {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    private Date createdAt;
-    private Date updateAt;
-    private Boolean isDeleted;
+@Entity
+public class Category extends BaseModel{
+    String title;
+    @OneToMany(mappedBy="category", cascade = {CascadeType.REMOVE})
+    List<Product> products;
 }

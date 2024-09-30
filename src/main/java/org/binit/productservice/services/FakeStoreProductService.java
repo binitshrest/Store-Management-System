@@ -34,7 +34,7 @@ public class FakeStoreProductService implements ProductService {
         product.setPrice(fakeStoreProductDto.getPrice());
         product.setDescription(fakeStoreProductDto.getDescription());
         product.setImageUrl(fakeStoreProductDto.getImage());
-        product.setCategory(fakeStoreProductDto.getCategory());
+//        product.setCategory(fakeStoreProductDto.getCategory());
 
         Rating rating = new Rating();
         rating.setRate(fakeStoreProductDto.getRating().getRate());
@@ -61,22 +61,21 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public Product createProduct( String title, String description,
                                   double price, String imageUrl,
-                                  String category,
-                                  FakeStoreRatingDto rating
-    ){
+                                  String category)
+    {
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
         fakeStoreProductDto.setTitle(title);
         fakeStoreProductDto.setDescription(description);
         fakeStoreProductDto.setPrice(price);
         fakeStoreProductDto.setImage(imageUrl);
         fakeStoreProductDto.setCategory(category);
-
-        FakeStoreRatingDto fakeStoreRatingDto = new FakeStoreRatingDto();
-        fakeStoreRatingDto.setRate(rating.getRate());   // Correctly extract rate
-        fakeStoreRatingDto.setCount(rating.getCount()); // Correctly extract count
+//
+//        FakeStoreRatingDto fakeStoreRatingDto = new FakeStoreRatingDto();
+//        fakeStoreRatingDto.setRate(rating.getRate());   // Correctly extract rate
+//        fakeStoreRatingDto.setCount(rating.getCount()); // Correctly extract count
 
         // Set the rating in the product DTO
-        fakeStoreProductDto.setRating(fakeStoreRatingDto);
+//        fakeStoreProductDto.setRating(fakeStoreRatingDto);
 
 
         FakeStoreProductDto response = restTemplate.postForObject(

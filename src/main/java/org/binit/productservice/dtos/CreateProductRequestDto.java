@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Rating;
 
 @Getter
@@ -16,5 +17,4 @@ public class CreateProductRequestDto {
     private String description;
     private String category;
     private double price;
-    private FakeStoreRatingDto rating;
 }

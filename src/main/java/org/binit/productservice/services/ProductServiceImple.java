@@ -1,13 +1,27 @@
 package org.binit.productservice.services;
 
 import org.binit.productservice.dtos.FakeStoreRatingDto;
+import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
+import org.binit.productservice.repositories.CategoryRepository;
+import org.binit.productservice.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("productserviceimple")
 public class ProductServiceImple implements ProductService{
+
+    ProductRepository productRepository;
+    CategoryRepository categoryRepository;
+
+    //Injecting Product Repository in ProductServiceImpl
+    public ProductServiceImple(ProductRepository productRepository,
+                                CategoryRepository categoryRepository){
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
     @Override
     public Product getSingleProductById(Long id) {
         return null;
@@ -15,12 +29,27 @@ public class ProductServiceImple implements ProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        List<Product> products = productRepository.findAll();
+        return products;
     }
 
     @Override
-    public Product createProduct(String title, String description, double price, String imageUrl, String category, FakeStoreRatingDto rating) {
-        return null;
+    public Product createProduct(String title, String description, double price, String imageUrl, String categoryTitle) {
+        Product product = new Product();
+        product.setTitle(title);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setImageUrl(imageUrl);
+
+        Category categoryTitlefromDB = categoryRepository.findByTitle(categoryTitle);
+        if(categoryTitlefromDB == null){
+           Category newCategory = new Category();
+           newCategory.setTitle(categoryTitle);
+           categoryTitlefromDB = newCategory;
+//           categoryTitlefromDB = categoryRepository.save(newCategory);
+        }
+        product.setCategory(categoryTitlefromDB);
+        return productRepository.save(product);
     }
 
     @Override

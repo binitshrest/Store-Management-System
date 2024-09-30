@@ -20,7 +20,8 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String imageUrl;
-    private String category;
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    private Category category;
     @OneToOne(cascade = CascadeType.PERSIST) // Cascade all operations including delete
     private Rating rating;
 }
