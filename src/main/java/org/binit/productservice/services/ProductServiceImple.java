@@ -8,6 +8,7 @@ import org.binit.productservice.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("productserviceimple")
 public class ProductServiceImple implements ProductService{
@@ -24,7 +25,8 @@ public class ProductServiceImple implements ProductService{
 
     @Override
     public Product getSingleProductById(Long id) {
-        return null;
+        Optional<Product> data = productRepository.findById(id);
+        return data.orElse(null);
     }
 
     @Override
@@ -59,7 +61,8 @@ public class ProductServiceImple implements ProductService{
 
     @Override
     public List<Product> getProductsByCategory(String category) {
-        return List.of();
+
+        return null;
     }
 
     @Override
