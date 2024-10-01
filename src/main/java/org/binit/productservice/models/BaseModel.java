@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -17,7 +18,19 @@ public class BaseModel {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private Date createdAt;
-    private Date updateAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Boolean isDeleted;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
 }
