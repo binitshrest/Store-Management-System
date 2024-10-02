@@ -35,7 +35,7 @@ public class ProductController {
         );
     }
 
-
+    //get all products
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> responseData = productService.getAllProducts();
@@ -45,12 +45,13 @@ public class ProductController {
         return responseEntity;
     }
 
+    //get a single product
     @GetMapping("/products/{id}")
     public Product getSingleProductById(@PathVariable("id") Long id){
         return productService.getSingleProductById(id);
     }
 
-
+    //update a product in a database
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
@@ -76,12 +77,27 @@ public class ProductController {
 
         return productService.getByTitleAndPrice(title, price);
     }
-    //Get product by price
 
+    //Get all product by category name
+    @GetMapping("/products/category/{category_title}")
+    public List<Product> getProductByCategoryTitle(
+            @PathVariable("category_title")
+            String category_title
+            ){
+            return productService.getProductByCategoryTitle(category_title);
+    }
+
+    //Delete a product by id
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();  // Return 204 No Content if successful
     }
     //Search by product name
+    //get by price lowest
+    @GetMapping("/products/price-low")
+    public List<Product> getProductByLowestPrice(){
+        return productService.getProductByLowestPrice();
+    }
+    //get by price highest
 }

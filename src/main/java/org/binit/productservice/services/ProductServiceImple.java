@@ -75,8 +75,24 @@ public class ProductServiceImple implements ProductService{
         return resultByTitleAndCategory;
     }
 
+    //Get Product by categoryTitle
+    @Override
+    public List<Product> getProductByCategoryTitle(String categoryTitle) {
+        List<Product> findByCategoryTitle = productRepository.findByCategory_title(categoryTitle);
+        return findByCategoryTitle;
+    }
+
     @Override
     public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public List<Product> getProductByLowestPrice() {
+        return productRepository.findAllByOrderByPriceAsc();
+    }
+
+    //get by price lowest
+    //get by price highest
+
 }

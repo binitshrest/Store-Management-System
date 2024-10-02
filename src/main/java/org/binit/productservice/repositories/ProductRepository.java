@@ -12,6 +12,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
     Optional<Product> findById(Long id);
     List<Product> findByTitleAndPrice(String title, Double price);
-    Optional<Category> findByTitle(String title);
+    List<Product> findByCategory_title(String categoryTitle);
     void deleteById(Long id);
+    List<Product> findAllByOrderByPriceAsc(); // For ascending order
+    List<Product> findAllByOrderByPriceDesc(); // For descending order
 }

@@ -16,5 +16,7 @@ public interface ProductService {
                                   Category category);
     public Product updateAProduct(Product inputProduct);
     public List<Product> getByTitleAndPrice(String title, Double price);
+    public List<Product> getProductByCategoryTitle(String categoryTitle);
     void deleteProductById(Long id);
+    public List<Product> getProductByLowestPrice();
 }
