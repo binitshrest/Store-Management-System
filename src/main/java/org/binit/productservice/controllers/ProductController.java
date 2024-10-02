@@ -2,6 +2,7 @@ package org.binit.productservice.controllers;
 
 import org.binit.productservice.dtos.CreateProductRequestDto;
 import org.binit.productservice.dtos.ErrorDto;
+import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
 import org.binit.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,12 +23,15 @@ public class ProductController {
 
     @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDto productRequestDto){
+        Category category = new Category();
+        category.setTitle(productRequestDto.getCategory().getTitle());
+
         return productService.createProduct(
                 productRequestDto.getTitle(),
                 productRequestDto.getDescription(),
                 productRequestDto.getPrice(),
                 productRequestDto.getImageUrl(),
-                productRequestDto.getCategory()
+                category
         );
     }
 
@@ -46,13 +50,15 @@ public class ProductController {
         return productService.getSingleProductById(id);
     }
 
+
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
             @RequestBody CreateProductRequestDto productRequestDto
     ) {
         // Map DTO to Product entity
-        Product inputProduct = mapToEntity(id, productRequestDto);
+        CreateProductRequestDto dtoMap = new CreateProductRequestDto();
+        Product inputProduct = dtoMap.mapToEntity(id, productRequestDto);
 
         // Call the service layer to update the product
         Product updatedProduct = productService.updateAProduct(
@@ -77,14 +83,5 @@ public class ProductController {
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();  // Return 204 No Content if successful
     }
-
-    private Product mapToEntity(Long id, CreateProductRequestDto dto) {
-        Product product = new Product();
-        product.setId(id);
-        product.setTitle(dto.getTitle());
-        product.setPrice(dto.getPrice());
-        product.setDescription(dto.getDescription());
-        product.setImageUrl(dto.getImageUrl());
-        return product;
-    }
+    //Search by product name
 }

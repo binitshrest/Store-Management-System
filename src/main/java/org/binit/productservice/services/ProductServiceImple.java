@@ -36,23 +36,25 @@ public class ProductServiceImple implements ProductService{
     }
 
     @Override
-    public Product createProduct(String title, String description, double price, String imageUrl, String categoryTitle) {
+    public Product createProduct(String title, String description, double price, String imageUrl, Category category) {
         Product product = new Product();
         product.setTitle(title);
         product.setDescription(description);
         product.setPrice(price);
         product.setImageUrl(imageUrl);
 
-        Category categoryTitlefromDB = categoryRepository.findByTitle(categoryTitle);
-        if(categoryTitlefromDB == null){
-           Category newCategory = new Category();
-           newCategory.setTitle(categoryTitle);
-           categoryTitlefromDB = newCategory;
-//           categoryTitlefromDB = categoryRepository.save(newCategory);
+        String categoryTitle = category.getTitle(); // Extract the title from the Category object
+        Category categoryFromDB = categoryRepository.findByTitle(categoryTitle);
+
+        if (categoryFromDB == null) {
+            // Save the new category if it does not exist
+            categoryFromDB = categoryRepository.save(category);
         }
-        product.setCategory(categoryTitlefromDB);
+
+        product.setCategory(categoryFromDB);
         return productRepository.save(product);
     }
+
 
     @Override
     public Product updateAProduct(Product inputProduct) {

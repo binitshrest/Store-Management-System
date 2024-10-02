@@ -1,5 +1,6 @@
 package org.binit.productservice.services;
 
+import org.binit.productservice.dtos.CategoryDto;
 import org.binit.productservice.dtos.FakeStoreRatingDto;
 import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
@@ -12,7 +13,7 @@ public interface ProductService {
     public List<Product> getAllProducts();
     public Product createProduct( String title, String description,
                                   double price, String imageUrl,
-                                  String category);
+                                  Category category);
     public Product updateAProduct(Product inputProduct);
     public List<Product> getByTitleAndPrice(String title, Double price);
     void deleteProductById(Long id);
