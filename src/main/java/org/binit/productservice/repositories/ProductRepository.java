@@ -1,5 +1,6 @@
 package org.binit.productservice.repositories;
 
+import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product save(Product entity);
     List<Product> findAll();
     Optional<Product> findById(Long id);
-    List<Product> findByTitleAndCategory();
-//    List<Product> findByCategory();
+    List<Product> findByTitleAndPrice(String title, Double price);
+    Optional<Category> findByTitle(String title);
 }

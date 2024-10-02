@@ -51,25 +51,25 @@ public class ProductController {
             @PathVariable Long id,
             @RequestBody CreateProductRequestDto productRequestDto
     ) {
+        // Map DTO to Product entity
+        Product inputProduct = mapToEntity(id, productRequestDto);
+
         // Call the service layer to update the product
         Product updatedProduct = productService.updateAProduct(
-                id,
-                productRequestDto.getTitle(),
-                productRequestDto.getImageUrl(),
-                productRequestDto.getDescription(),
-                productRequestDto.getCategory(),
-                productRequestDto.getPrice()
+                inputProduct
         );
 
         // Return the updated product with HTTP status OK (200)
         return ResponseEntity.ok(updatedProduct);
     }
 
-    @GetMapping("/products/category/{category}")
-    public List<Product> getProductsByCategory(@PathVariable("category") String category) {
-        return productService.getProductsByCategory(category);
-    }
+    @GetMapping("/products/by-title-and-price")
+    public List<Product> getByTitleAndCategory(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "price", required = false) Double price) {
 
+        return productService.getByTitleAndPrice(title, price);
+    }
     //Get product by price
 
     @DeleteMapping("/products/{id}")
@@ -78,5 +78,13 @@ public class ProductController {
         return ResponseEntity.noContent().build();  // Return 204 No Content if successful
     }
 
-
+    private Product mapToEntity(Long id, CreateProductRequestDto dto) {
+        Product product = new Product();
+        product.setId(id);
+        product.setTitle(dto.getTitle());
+        product.setPrice(dto.getPrice());
+        product.setDescription(dto.getDescription());
+        product.setImageUrl(dto.getImageUrl());
+        return product;
+    }
 }

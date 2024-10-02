@@ -55,14 +55,22 @@ public class ProductServiceImple implements ProductService{
     }
 
     @Override
-    public Product updateAProduct(Long id, String title, String image, String decription, String category, double price) {
-        return null;
+    public Product updateAProduct(Product inputProduct) {
+        Optional<Product> aProduct = productRepository.findById(inputProduct.getId());
+        Product updatedProduct = aProduct.get();
+        updatedProduct.setTitle(inputProduct.getTitle());
+        updatedProduct.setPrice(inputProduct.getPrice());
+        updatedProduct.setDescription(inputProduct.getDescription());
+        updatedProduct.setImageUrl(inputProduct.getImageUrl());
+        Optional<Category> aCategory = Optional.ofNullable(categoryRepository.findByTitle(inputProduct.getCategory().getTitle()));
+        updatedProduct.setCategory(aCategory.get());
+        return productRepository.save(updatedProduct);
     }
 
     @Override
-    public List<Product> getProductsByCategory(String category) {
-
-        return null;
+    public List<Product> getByTitleAndPrice(String title, Double price) {
+        List<Product> resultByTitleAndCategory = productRepository.findByTitleAndPrice(title, price);
+        return resultByTitleAndCategory;
     }
 
     @Override
