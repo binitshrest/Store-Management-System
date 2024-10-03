@@ -72,8 +72,8 @@ public class ProductController {
 
     @GetMapping("/products/by-title-and-price")
     public List<Product> getByTitleAndCategory(
-            @RequestParam(value = "title", required = false) String title,
-            @RequestParam(value = "price", required = false) Double price) {
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "price") Double price) {
 
         return productService.getByTitleAndPrice(title, price);
     }
