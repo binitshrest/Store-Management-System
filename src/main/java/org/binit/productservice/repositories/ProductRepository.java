@@ -2,6 +2,7 @@ package org.binit.productservice.repositories;
 
 import org.binit.productservice.models.Category;
 import org.binit.productservice.models.Product;
+import org.binit.productservice.repositories.projections.getProductByIdAndTitle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,4 +28,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "Select * from Product where title=:title and id = :id", nativeQuery = true)
     Product getProductWithASomeTitleAndId(@Param("title") String title, @Param("id") Long id);
+
+    @Query("select  p.id, p.title from Product p where p.category.title = :title and p.id= :id")
+    getProductByIdAndTitle getProductWithATitleAndId(@Param("title")String title
+            , @Param("id") Long id);
 }

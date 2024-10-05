@@ -21,6 +21,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDto productRequestDto){
         Category category = new Category();
