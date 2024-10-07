@@ -6,10 +6,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
     ports:
-    - "3307:3306"
+    - "3306:3306"
     volumes:
       - ./data.sql:/docker-entrypoint-initdb.d/data.sql
-      
+
   spring-boot-app:
     build: .
     ports:

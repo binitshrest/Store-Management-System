@@ -16,7 +16,8 @@ import java.util.List;
 @Entity
 public class Category extends BaseModel{
     String title;
-    @OneToMany(mappedBy="category", cascade = {CascadeType.REMOVE})
+    //by default fetch type is lazy it will execute only one query in lazy
+    @OneToMany(mappedBy="category", cascade = {CascadeType.REMOVE}, fetch=FetchType.EAGER)
     @JsonIgnore
     List<Product> products;
 }

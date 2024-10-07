@@ -20,7 +20,11 @@ public class ProductController {
     public ProductController(@Qualifier("productserviceimple") ProductService productService){
         this.productService = productService;
     }
-
+    
+    @GetMapping("/") 
+    public String home(){
+        return "Welcome to the product page";
+    }
 
     @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDto productRequestDto){
